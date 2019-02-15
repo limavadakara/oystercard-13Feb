@@ -27,9 +27,9 @@ class Oystercard
     @balance -= amount
   end
 
-  def touch_in(entry_station = nil)
+  def touch_in(entry_station)
     raise "The money is not enough in card." if balance <= MIN_BALANCE
-    entry_station = @station_class.new("Liverpool", 1)
+    entry_station = @station_class.new("Liverpool, 1)
     @current_journey = @journey_class.new(entry_station)
   end
 
