@@ -23,8 +23,13 @@ describe JourneyLog do
     log = JourneyLog.new(journey_class_double)
     log.start(station_double)
     log.finish(station_double)
-    expect(log.journeys).to include(journey_double)
+    expect(log.instance_variable_get(:@journeys)).to include(journey_double)
 
   end
+
+  it "returns error following attempted modification of the returned list of journeys" do
+    expect(subject.journeys).not_to equal(subject.instance_variable_get(:@journeys))
+  end
+
 
 end

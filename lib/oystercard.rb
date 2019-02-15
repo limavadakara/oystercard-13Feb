@@ -7,12 +7,11 @@ class Oystercard
   MIN_BALANCE = 1
   MINIMUM_CHARGE = 1
 
-  attr_reader :balance, :entry_station, :journeys, :current_journey
+  attr_reader :balance
 
-  def initialize(journey_class = Journey, journey_log_class = JourneyLog)
+  def initialize(journey_log_class = JourneyLog)
     @balance = 0
     @in_journey = false
-    @journey_class = journey_class
     @journey_log_class = journey_log_class
 
   end
@@ -38,6 +37,8 @@ class Oystercard
     deduct(MINIMUM_CHARGE)
 
   end
+
+
 
   private :deduct
 

@@ -36,13 +36,15 @@ describe Oystercard do
     end
 
     it "should deduct minimum fare from balance after touch out" do
-      journey_double = double :journey, finish: {}
-      journey_class_double = double :journey_class, new: journey_double
-      card = Oystercard.new(journey_class_double)
+      journey_log_double = double :journey_log, finish: {}, start: {}
+      journey_log_class_double = double :journey_log_class, new: journey_log_double
+      card = Oystercard.new(journey_log_class_double)
       card.top_up(2)
-      card.touch_in
+      card.touch_in(entry_station)
       expect{card.touch_out(exit_station) }.to change{ card.balance}.by -1
     end
+
+
 
 
 
