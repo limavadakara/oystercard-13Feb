@@ -1,6 +1,10 @@
 require 'journey_log'
 describe JourneyLog do
 
+  it "gets created with an empty list of journeys" do
+    expect(subject.journeys).to eq([])
+  end
+
   it 'starts a new journey' do
 
     station_double = double :station

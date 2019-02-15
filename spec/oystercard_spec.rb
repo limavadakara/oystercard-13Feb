@@ -28,15 +28,6 @@ describe Oystercard do
         subject.top_up(2)
       end
 
-      it 'can touch in' do
-        journey_double = double :journey
-        journey_class_double = double :journey_class, new: journey_double
-        card = Oystercard.new(journey_class_double)
-        card.top_up(2)
-        card.touch_in
-        expect(card.current_journey).to eq journey_double
-      end
-      
     end
     it "should not allow to touch in when less than £1 is in the card" do
       subject.top_up(0.1)
@@ -53,19 +44,7 @@ describe Oystercard do
       expect{card.touch_out(exit_station) }.to change{ card.balance}.by -1
     end
 
-    it "gets created with an empty list of journeys" do
-      expect(subject.journeys).to eq([])
-    end
 
-    it 'stores a journey to the list of journeys' do
-      journey_double = double :journey, finish: {}
-      journey_class_double = double :journey_class, new: journey_double
-      card = Oystercard.new(journey_class_double)
-      card.top_up(2)
-      card.touch_in
-      card.touch_out(exit_station)
-      expect(card.journeys).to eq [journey_double]
-    end
 
 
 end

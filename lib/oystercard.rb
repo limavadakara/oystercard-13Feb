@@ -9,12 +9,11 @@ class Oystercard
 
   attr_reader :balance, :entry_station, :journeys, :current_journey
 
-  def initialize(journey_class = Journey, station_class = Station)
+  def initialize(journey_class = Journey, journey_log_class = JourneyLog)
     @balance = 0
     @in_journey = false
-    @journeys = []
     @journey_class = journey_class
-    @station_class = station_class
+    @journey_log_class = journey_log_class
 
   end
 
@@ -27,16 +26,16 @@ class Oystercard
     @balance -= amount
   end
 
-  def touch_in(entry_station)
+  def touch_in(entry_station=nil)
     raise "The money is not enough in card." if balance <= MIN_BALANCE
-    entry_station = @station_class.new("Liverpool, 1)
-    @current_journey = @journey_class.new(entry_station)
+    @journey_log = @journey_log_class.new
+    @journey_log.start(entry_station)
+
   end
 
   def touch_out(exit_station)
-    @current_journey.finish(exit_station)
+    @journey_log.finish(exit_station)
     deduct(MINIMUM_CHARGE)
-    @journeys << @current_journey
 
   end
 
